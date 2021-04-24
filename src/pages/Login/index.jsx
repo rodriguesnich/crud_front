@@ -23,6 +23,7 @@ export default function Login({setUser, setLoggedIn}) {
           var token = credential.accessToken;
           // The signed-in user info.
           var user = result.user;
+          console.log(user);
           setUser(user)
           setLoggedIn(true)
           // ...

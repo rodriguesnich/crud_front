@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -8,6 +8,10 @@ export default function BasicExample() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({})
 
+  useEffect(() => {
+    console.log(user);
+  },[user])
+
   return (
     <Router>
       <div>     
@@ -16,19 +20,19 @@ export default function BasicExample() {
           <Link className="navbar-brand mb-0 h1" to="/">
           TBP
           </Link>
-          <Link className="btn btn-outline-primary me-2" to="/prices">
+          {/* <Link className="btn btn-outline-primary me-2" to="/prices">
             Preços
-          </Link>
+          </Link> */}
         </div>
       </header>
 
         <Switch>
           <Route exact path="/">
-             {loggedIn ? <Redirect to="/prices" /> : <Login setUser={setUser} setLoggedIn={setLoggedIn} /> }
+             {loggedIn ? <Prices user={user} /> : <Login setUser={setUser} setLoggedIn={setLoggedIn} /> }
           </Route>
-          <Route path="/prices">
-            <Prices />
-          </Route>
+          {/* <Route path="/prices">
+            <Prices user={user} />
+          </Route> */}
           {/* <Route path="/about">
             <About />
           </Route> */}
