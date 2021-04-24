@@ -49,12 +49,22 @@ export default function Prices({ user }) {
       });
   }, []);
 
-  // useEffect(() => {
-  //   console.log(state);
-  // }, [state]);
+  function handleProductSubmit(params) {
+    console.log("product Submit");
+    let productForm = document.querySelector("#addProduct");
+    let productData = new FormData(productForm);
+    let productObj = Object.fromEntries(productData);
 
-  function popModal(params) {
-    console.log("ai papy");
+    database
+      .collection("Products")
+      .doc()
+      .set(productObj)
+      .then(() => {
+        console.log("Document successfully written!");
+      });
+
+    console.log(productObj);
+    handleClose();
   }
 
   function handleQtdChange(event) {
@@ -90,14 +100,14 @@ export default function Prices({ user }) {
     let data = props.data.data();
     return (
       <tr>
-        <td onClick={popModal}>{data.product_name}</td>
+        <td onClick={handleShow}>{data.product_name}</td>
         <td>{data.unit_buy_price}</td>
         <td>{data.unit_sell_price}</td>
         <td>
           <select
             name="product_qtd"
             id="product_qtd"
-            className={`${props.data.id}`}
+            className={`${props.data.id} form-select`}
             onChange={handleQtdChange}
           >
             <option value="und">und</option>
@@ -110,17 +120,69 @@ export default function Prices({ user }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} centered={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Criar Produto</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <form id="addProduct">
+            <h5>Sobre</h5>
+            <div className="row">
+              <label className="col-12">
+                Nome:
+                <input
+                  type="text"
+                  name="product_name"
+                  className="form-control"
+                />
+              </label>
+            </div>
+            <h5>Unidade</h5>
+            <div className="row">
+              <label className="col-12">
+                Preço Compra:
+                <input
+                  type="number"
+                  name="unit_buy_price"
+                  className="form-control"
+                />
+              </label>
+              <label className="col-12">
+                Preço Venda:
+                <input
+                  type="number"
+                  name="unit_sell_price"
+                  className="form-control"
+                />
+              </label>
+            </div>
+            <h5>Pacote</h5>
+            <div className="row">
+              <label className="col-12">
+                Preço Compra:
+                <input
+                  type="number"
+                  name="package_buy_price"
+                  className="form-control"
+                />
+              </label>
+              <label className="col-12">
+                Preço Venda:
+                <input
+                  type="number"
+                  name="package_sell_price"
+                  className="form-control"
+                />
+              </label>
+            </div>
+          </form>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Fechar
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={handleProductSubmit}>
+            Salvar
           </Button>
         </Modal.Footer>
       </Modal>
