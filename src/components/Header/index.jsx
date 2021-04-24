@@ -7,18 +7,11 @@ export default function Header() {
       <header className="myNav navbar navbar-secondary bg-dark mb-4 text-light">
         <div className="container-fluid">
           <Link className="navbar-brand mb-0 h1" to="/">
-          My_Brand
+          TBP
           </Link>
           <Link className="btn btn-outline-primary me-2" to="/stock">
-            Estoque
+            Preços
           </Link>
-          <button className="btn btn-outline-primary me-2" type="button">
-            Venda
-          </button>
-          <button className="btn btn-outline-primary me-2" type="button">
-            Finaças
-          </button>
-          <span className="navbar-brand mb-0 h1">Nicholas</span>
         </div>
       </header>
     </Router>
