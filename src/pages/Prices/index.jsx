@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { database } from "../../api/api";
 
-export default function Stock() {
+export default function Prices() {
   const [state, setState] = useState([]);
   const [buyPrice, setBuyPrice] = useState("");
   const [sellPrice, setSellPrice] = useState("");
