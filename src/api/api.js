@@ -21,4 +21,28 @@ const database = firebase.firestore();
 const authInstance = firebase.auth;
 const authMethod = firebase.auth();
 
+const signInWithGoogle = async () => {
+  const provider = new authInstance.GoogleAuthProvider();
+  const result = await authMethod.signInWithPopup(provider);
+  return result;
+};
+
+// const getProducts = async () => {
+//   database
+//     .collection("Products")
+//     .get()
+//     .then((querySnapshot) => {
+//       let data = [];
+//       querySnapshot.forEach((doc) => {
+//         data.push(doc);
+//         // console.log(doc.id, " => ", doc.data());
+//         console.log("Data Get Succed");
+//       });
+//       return data;
+//     })
+//     .catch((error) => {
+//       console.log("Error getting documents: ", error);
+//     });
+// };
+
 export { database, authInstance, authMethod };

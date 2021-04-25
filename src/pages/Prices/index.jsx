@@ -31,8 +31,7 @@ export default function Prices({ user }) {
   //   });
   // }, []);
 
-  useEffect(() => {
-    // console.log("train get data");
+  function getProducts(params) {
     database
       .collection("Products")
       .get()
@@ -47,6 +46,11 @@ export default function Prices({ user }) {
       .catch((error) => {
         console.log("Error getting documents: ", error);
       });
+  }
+
+  useEffect(() => {
+    // console.log("train get data");
+    getProducts()
   }, []);
 
   function handleProductSubmit(params) {
@@ -61,6 +65,7 @@ export default function Prices({ user }) {
       .set(productObj)
       .then(() => {
         console.log("Document successfully written!");
+        getProducts()
       });
 
     console.log(productObj);
